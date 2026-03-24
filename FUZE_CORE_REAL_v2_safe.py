@@ -732,6 +732,77 @@ def make_plot(
     plt.close(fig)
 
 
+import matplotlib.pyplot as plt
+import numpy as np
+from typing import Optional, Sequence, Dict
+from pathlib import Path
+
+
+def make_plot(
+        x: np.ndarray,
+        y: Optional[np.ndarray],
+        yhat: Optional[np.ndarray],
+        baseline: Optional[np.ndarray],
+        comps: Optional[Sequence[np.ndarray]],
+        proxy_x: np.ndarray,
+        proxy: Dict[str, np.ndarray],
+        core_peaks: Sequence,  # Peak type
+        outpath: Path,
+        title: str,
+) -> None:
+    # 1. Definujeme layout="constrained" přímo při vytváření figury
+    fig = plt.figure(figsize=(13, 9), layout="constrained")
+
+    # 2. Gridspec nyní necháme bez hspace, o to se postará constrained layout
+    gs = fig.add_gridspec(3, 1, height_ratios=[2.1, 1.2, 0.9])
+
+    # --- Horní graf (Data a Fit) ---
+    ax1 = fig.add_subplot(gs[0])
+    if y is not None:
+        ax1.plot(x, y, ".", ms=4, alpha=0.65, label="real data")
+    if yhat is not None:
+        ax1.plot(x, yhat, "-", lw=2.2, label="primary core fit")
+    if baseline is not None:
+        ax1.plot(x, baseline, "--", lw=1.8, label="baseline")
+    if comps is not None:
+        for i, c in enumerate(comps, start=1):
+            ax1.plot(x, c + (baseline if baseline is not None else 0), ":", lw=1.5, label=f"mode {i}")
+    for p in core_peaks:
+        ax1.axvline(p.x0, color="k", lw=1.0, alpha=0.2)
+    ax1.set_title(title)
+    ax1.set_xlabel("Frequency")
+    ax1.set_ylabel("Signal")
+    ax1.legend(fontsize=9, ncol=2)
+
+    # --- Prostřední graf (Proxy parametry) ---
+    ax2 = fig.add_subplot(gs[1])
+    ax2.plot(proxy_x, proxy["Lcore"], label="L_core")
+    ax2.plot(proxy_x, proxy["gamma_tr"], label="Gamma_tr")
+    ax2.plot(proxy_x, proxy["Epair_star"], label="E_pair* proxy")
+    for p in core_peaks:
+        ax2.axvline(p.x0, color="k", lw=1.0, alpha=0.2)
+    ax2.set_xlabel("Frequency")
+    ax2.set_ylabel("Proxy amplitude")
+    ax2.set_title("RTIM core proxy anchored to the real resonances")
+    ax2.legend(fontsize=9)
+
+    # --- Spodní graf (Detekovatelnost) ---
+    ax3 = fig.add_subplot(gs[2])
+    ax3.plot(proxy_x, proxy["Rcore"], label="R_core = E_pair*/sigma", lw=2)
+    peak_x = proxy_x[int(np.argmax(proxy["Rcore"]))]
+    ax3.axvline(peak_x, color="r", ls="--", lw=1.2, label=f"proxy peak = {peak_x:.3f}")
+    for p in core_peaks:
+        ax3.axvline(p.x0, color="k", lw=1.0, alpha=0.25)
+    ax3.set_xlabel("Frequency")
+    ax3.set_ylabel("Detectability")
+    ax3.legend(fontsize=9)
+
+    # 3. fig.tight_layout() JIŽ NENÍ POTŘEBA (vyřešeno v kroku 1)
+
+    # 4. Ukládáme s bbox_inches='tight' pro jistotu absolutně čistých okrajů
+    fig.savefig(outpath, dpi=180, bbox_inches='tight')
+    plt.close(fig)
+
 # ----------------------------
 # Main runner
 # ----------------------------
@@ -746,7 +817,7 @@ def main() -> None:
     ap.add_argument("--degree", type=int, default=1, choices=[0, 1, 2], help="baseline degree for core refit")
     ap.add_argument("--outdir", default="core_out")
     ap.add_argument("--max-nfev", type=int, default=4000)
-    ap.add_argument("--audit-competition", action="store_true", help="run a light 3-peak Lorentz audit without altering the primary fit")
+    ap.add_argument("--audit-competition", action="store_true", default=True, help="run a light 3-peak Lorentz audit without altering the primary fit")
     args = ap.parse_args()
 
     outdir = Path(args.outdir)
