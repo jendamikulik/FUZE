@@ -1,0 +1,65 @@
+{
+  "canonical_runner": "fuze.py",
+  "n_points": 5000,
+  "x_min": -124.95,
+  "x_max": 125.0,
+  "y_min": 0.00025416666666666643,
+  "y_max": 0.0017933333333333135,
+  "n_peaks": 3,
+  "baseline_degree": 2,
+  "fit_success": true,
+  "fit_message": "ok",
+  "rmse": 7.641577545171783e-05,
+  "r2": 0.9505373310946631,
+  "aic": -94769.21398136757,
+  "bic": -94691.00766307057,
+  "transfer_supported": true,
+  "peak_alignment_ok": true,
+  "residual_small": false,
+  "residual_corr_with_lcore": 5.593873681493019e-09,
+  "baseline_mean": 0.0002847391800299427,
+  "lcore_energy_l2": 0.00043450187153482093,
+  "residual_energy_l2": 7.641577545171783e-05,
+  "dominant_peak": {
+    "peak_index": 1.0,
+    "amplitude": 0.0012658810502531872,
+    "center": 8.939999628549542,
+    "gamma": 12.835435316468736,
+    "fwhm_proxy": 25.670870632937472,
+    "area_proxy": 0.051045019473528686,
+    "height_proxy": 0.0012658802818242812,
+    "baseline_degree": 2.0
+  },
+  "peaks": [
+    {
+      "peak_index": 1,
+      "amplitude": 0.0012658810502531872,
+      "center": 8.939999628549542,
+      "gamma": 12.835435316468736,
+      "fwhm_proxy": 25.670870632937472,
+      "area_proxy": 0.051045019473528686,
+      "height_proxy": 0.0012658802818242812,
+      "baseline_degree": 2
+    },
+    {
+      "peak_index": 2,
+      "amplitude": 0.0004725206871479363,
+      "center": 41.73438834237079,
+      "gamma": 13.086243393047512,
+      "fwhm_proxy": 26.172486786095025,
+      "area_proxy": 0.019426103268114062,
+      "height_proxy": 0.0004725200146541769,
+      "baseline_degree": 2
+    },
+    {
+      "peak_index": 3,
+      "amplitude": 0.0003716442048999856,
+      "center": 59.36739013633689,
+      "gamma": 1.1944110587122825,
+      "fwhm_proxy": 2.388822117424565,
+      "area_proxy": 0.0013945402499455288,
+      "height_proxy": 0.00037156543983155624,
+      "baseline_degree": 2
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+FUZE core summary
+=================
+points               : 5000
+x-range              : [-124.95, 125]
+peaks                : 3
+baseline degree      : 2
+fit success          : True
+rmse                 : 7.64158e-05
+r2                   : 0.950537
+aic / bic            : -94769.2 / -94691
+transfer_supported   : True
+peak_alignment_ok    : True
+residual_small       : False
+residual_corr_lcore  : 5.59387e-09
+
+Peaks:
+  - #1 center=8.94, gamma=12.8354, amp=0.00126588, area_proxy=0.051045
+  - #2 center=41.7344, gamma=13.0862, amp=0.000472521, area_proxy=0.0194261
+  - #3 center=59.3674, gamma=1.19441, amp=0.000371644, area_proxy=0.00139454
