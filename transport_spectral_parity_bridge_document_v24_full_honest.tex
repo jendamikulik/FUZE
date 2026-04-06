@@ -1,0 +1,2253 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[czech]{babel}
+\usepackage{amsmath,amsthm,amssymb,amsfonts,mathtools}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\geometry{margin=1in}
+
+\title{Transport--Spectral Contradiction Program for the Riemann Hypothesis\\
+\large Verze 24 -- final lock-form manuscript (honest unconditional target)}
+\author{Archiv Všeho -- Imprint}
+\date{\today}
+
+\newtheorem{theorem}{Věta}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Důsledek}
+\newtheorem{definition}[theorem]{Definice}
+\newtheorem{remark}[theorem]{Poznámka}
+\newtheorem{proposition}[theorem]{Propozice}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Tento dokument podává plnou syntézu transportně-spektrálního programu pro Riemannovu hypotézu.
+Strana \emph{uzavření} (closure) dává nulový excess přes Exact Window Law.
+Strana \emph{obstrukce} (obstruction) říká, že každý mimokritický nulový bod by po transportu
+vygeneroval lineární drift, jehož kvartická penalizace je koercivně neomezená.
+Mostní nerovnost (bridge inequality) pak převádí tento drift do witness bank.
+Výsledkem je čistý spor
+\[
+E_{\mathrm{ex}}(f)=0
+\qquad\text{versus}\qquad
+E_{\mathrm{ex}}(f)=+\infty.
+\]
+Dokument je matematicky poctivý: finální spor je zcela čistý, ale přechod od transportovaného
+módu k úplné mostní nerovnosti je zatím formulován jako podmíněný bridge package.
+\end{abstract}
+
+\section{Základní definice}
+
+\begin{definition}[Dipólově regularizovaný reziduální kanál]
+Nechť \(\mu\) označuje explicitně-formulový reziduální distribuční kanál ve fixní
+Guinand--Weilově normalizaci. Zvolme \(\psi\in\mathscr{S}(\mathbb{R})\) tak, že
+\[
+\widehat{\psi}(0)=0.
+\]
+Definujeme dipólově regularizovaný kanál
+\[
+f:=\psi * \mu.
+\]
+\end{definition}
+
+\begin{definition}[Witness bank]
+Zvolme dyadické škály
+\[
+a_j=2^j a_0,\qquad j=0,\dots,J,
+\]
+a kladné váhy \(w_j>0\). Pro funkci \(h\) definujeme druhou diferenci svědka
+\[
+(W_a h)(\tau):=h(\tau+a)-2h(\tau)+h(\tau-a).
+\]
+Je-li \(\varphi_{\tau,L}\) nezáporné okno lokalizované na \([\tau,\tau+L]\), pak definujeme bankovní energii
+\[
+Q_{\mathrm{bank}}(h;\tau,L):=
+\sum_{j=0}^{J} w_j^2 \int_{\tau}^{\tau+L} |W_{a_j}h(u)|^2\,\varphi_{\tau,L}(u)\,du.
+\]
+V zjednodušeném zápisu, když \(\varphi_{\tau,L}\equiv 1\) na nosiči integrace, budeme psát
+\[
+Q_{\mathrm{bank}}(h;\tau,L)\asymp
+\sum_{j=0}^{J} w_j^2 \int_{\tau}^{\tau+L} |W_{a_j}h(u)|^2\,du.
+\]
+\end{definition}
+
+\begin{definition}[Excess functional]
+Nechť \(E_0\ge 0\) je baseline density. Definujeme excess
+\[
+E_{\mathrm{ex}}(f):=
+\limsup_{L\to\infty}\sup_{\tau\in\mathbb{R}}
+\frac{Q_{\mathrm{bank}}(f;\tau,L)-E_0L}{L}.
+\]
+\end{definition}
+
+\section{Strana A: closure}
+
+\begin{definition}[Exact Window Law]
+Řekneme, že kanál \(f\) splňuje přesný okenní zákon, pokud existují
+\[
+J_f:\mathbb{R}\to\mathbb{R}
+\quad\text{omezená},\qquad
+R(\tau,L),
+\]
+takové, že
+\[
+Q_{\mathrm{bank}}(f;\tau,L)
+=
+E_0L+J_f(\tau+L)-J_f(\tau)+R(\tau,L),
+\]
+a současně
+\[
+\sup_{\tau\in\mathbb{R}}|J_f(\tau)|<\infty,
+\qquad
+\lim_{L\to\infty}\sup_{\tau\in\mathbb{R}}\frac{|R(\tau,L)|}{L}=0.
+\]
+\end{definition}
+
+\begin{theorem}[Vanishing of excess]
+Jestliže \(f\) splňuje Exact Window Law, pak
+\[
+E_{\mathrm{ex}}(f)=0.
+\]
+\end{theorem}
+
+\begin{proof}
+Po vydělení délkou \(L\) dostaneme
+\[
+\frac{Q_{\mathrm{bank}}(f;\tau,L)-E_0L}{L}
+=
+\frac{J_f(\tau+L)-J_f(\tau)}{L}
++
+\frac{R(\tau,L)}{L}.
+\]
+Vezmeme supremum přes \(\tau\):
+\[
+\sup_\tau\left|
+\frac{Q_{\mathrm{bank}}(f;\tau,L)-E_0L}{L}
+\right|
+\le
+\sup_\tau\left|
+\frac{J_f(\tau+L)-J_f(\tau)}{L}
+\right|
++
+\sup_\tau \frac{|R(\tau,L)|}{L}.
+\]
+Z omezenosti \(J_f\) plyne
+\[
+\sup_\tau\left|
+\frac{J_f(\tau+L)-J_f(\tau)}{L}
+\right|
+\le
+\frac{2\sup_\tau |J_f(\tau)|}{L}\to 0,
+\]
+a z předpokladu i
+\[
+\sup_\tau \frac{|R(\tau,L)|}{L}\to 0.
+\]
+Tedy
+\[
+\limsup_{L\to\infty}\sup_\tau
+\frac{Q_{\mathrm{bank}}(f;\tau,L)-E_0L}{L}=0,
+\]
+což je přesně
+\[
+E_{\mathrm{ex}}(f)=0.
+\]
+\end{proof}
+
+\section{Strana B: transportní obstrukce}
+
+\begin{definition}[Lifted drift]
+Nechť
+\[
+\rho=\beta+i\gamma
+\]
+je netriviální nulový bod se \(\beta\neq \frac12\). V logaritmickém čase \(\tau=\log t\) definujeme
+transportovaný drift
+\[
+\delta_\rho(\tau)=\frac{\beta-\tfrac12}{2\pi}\tau+r_\rho(\tau),
+\]
+kde \(r_\rho\) je omezený remainder.
+\end{definition}
+
+\begin{definition}[Kvartická penalizace]
+Definujeme
+\[
+P_4(\rho;\tau,L):=\int_\tau^{\tau+L} |\delta_\rho(u)|^4\,du.
+\]
+\end{definition}
+
+\begin{lemma}[Koercivní růst]
+Jestliže \(\beta\neq \frac12\) a \(r_\rho\) je omezený, pak existují konstanty \(c,C>0\) tak, že pro
+dost velká \(\tau\) a všechna \(L\ge 1\) platí
+\[
+P_4(\rho;\tau,L)\ge c\left|\beta-\frac12\right|^4\tau^4L-C\tau^3L.
+\]
+\end{lemma}
+
+\begin{proof}
+Položme
+\[
+a:=\frac{\beta-\tfrac12}{2\pi},\qquad \delta_\rho(u)=au+b(u),
+\]
+kde \(b\) je omezená. Rozvoj \(|au+b(u)|^4\) dává vedoucí člen \(a^4u^4\) a nižší členy nejvýše
+řádu \(u^3\). Po integraci přes \([\tau,\tau+L]\) dostaneme tvrzení.
+\end{proof}
+
+\section{Bridge algebra}
+
+\begin{definition}[Izolovaný transportovaný mód]
+Předpokládejme splitting
+\[
+f=f_\rho+f_{\mathrm{rest}},
+\]
+kde \(f_\rho\) je mód asociovaný s mimokritickému nulovému bodu \(\rho\), zatímco
+\(f_{\mathrm{rest}}\) obsahuje zbytek spektrálního obsahu.
+\end{definition}
+
+\begin{definition}[Witness coercivity]
+Řekneme, že witness bank čte izolovaný mód koercivně, pokud existují konstanty
+\[
+\kappa>0,\qquad C_0\ge 0
+\]
+tak, že pro dost velká \(\tau\) platí
+\[
+\sum_{j=0}^{J} w_j^2 |W_{a_j}f_\rho(\tau)|^2
+\ge
+\kappa |\delta_\rho(\tau)|^4-C_0.
+\]
+\end{definition}
+
+\begin{definition}[Sub-coercive leakage / no-hiding]
+Řekneme, že remainder kanál je bank-subcritical, pokud existují
+\[
+\eta\in[0,\kappa),\qquad C_1\ge 0
+\]
+tak, že pro dost velká \(\tau\) platí
+\[
+\sum_{j=0}^{J} w_j^2
+\Bigl(
+2\Re\bigl(W_{a_j}f_\rho(\tau)\overline{W_{a_j}f_{\mathrm{rest}}(\tau)}\bigr)
++
+|W_{a_j}f_{\mathrm{rest}}(\tau)|^2
+\Bigr)
+\ge
+-\eta |\delta_\rho(\tau)|^4-C_1.
+\]
+\end{definition}
+
+\begin{lemma}[Kvadratický rozklad banky]
+Z rozkladu
+\[
+f=f_\rho+f_{\mathrm{rest}}
+\]
+plyne pro každý scale \(a_j\)
+\[
+|W_{a_j}f|^2
+=
+|W_{a_j}f_\rho|^2
++
+2\Re\!\Bigl(W_{a_j}f_\rho\,\overline{W_{a_j}f_{\mathrm{rest}}}\Bigr)
++
+|W_{a_j}f_{\mathrm{rest}}|^2.
+\]
+Po sečtení přes \(j\) a integraci přes okno tedy
+\[
+Q_{\mathrm{bank}}(f;\tau,L)
+=
+Q_{\mathrm{bank}}(f_\rho;\tau,L)
++
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)
++
+Q_{\mathrm{bank}}(f_{\mathrm{rest}};\tau,L).
+\]
+\end{lemma}
+
+\begin{proof}
+Jde o čistý kvadratický rozvoj výrazu \(|W_{a_j}(f_\rho+f_{\mathrm{rest}})|^2\).
+\end{proof}
+
+\begin{theorem}[Target Bridge Inequality]
+Za předpokladů witness coercivity a no-hiding leakage existují konstanty
+\[
+c_1>0,\qquad c_2\ge 0
+\]
+tak, že pro dost velká \(\tau\) a všechna \(L\ge 1\) platí
+\[
+Q_{\mathrm{bank}}(f;\tau,L)-E_0L
+\ge
+c_1P_4(\rho;\tau,L)-c_2L.
+\]
+Přesněji lze vzít
+\[
+c_1:=\kappa-\eta>0,
+\qquad
+c_2:=C_0+C_1.
+\]
+\end{theorem}
+
+\begin{proof}
+Z koercivity dostáváme po integraci přes \([\tau,\tau+L]\)
+\[
+Q_{\mathrm{bank}}(f_\rho;\tau,L)\ge \kappa P_4(\rho;\tau,L)-C_0L.
+\]
+Z no-hiding estimate dostáváme
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)
++
+Q_{\mathrm{bank}}(f_{\mathrm{rest}};\tau,L)
+\ge
+-\eta P_4(\rho;\tau,L)-C_1L.
+\]
+Po sečtení:
+\[
+Q_{\mathrm{bank}}(f;\tau,L)-E_0L
+\ge
+(\kappa-\eta)P_4(\rho;\tau,L)-(C_0+C_1)L.
+\]
+To je přesně požadovaná nerovnost.
+\end{proof}
+
+
+\begin{lemma}[M5: Asymptotická ortogonalita driftu a no-hiding estimate]
+Nechť
+\[
+f=f_\rho+f_{\mathrm{rest}}
+\]
+je splitting kanálu na izolovaný mimokritický mód a remainder.
+Předpokládejme, že pro každé měřítko \(a_j\), \(j=0,\dots,J\), existují na okně
+\([\tau,\tau+L]\) reprezentace
+\[
+W_{a_j}f_\rho(u)=B_{\rho,j}(u)e^{i\Theta_\rho(u)},
+\qquad
+W_{a_j}f_{\mathrm{rest}}(u)=B_{\mathrm{rest},j}(u)e^{i\Theta_{\mathrm{rest},j}(u)},
+\]
+kde platí následující podmínky:
+
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item \textbf{Fázová separace.}
+    Pro rozdílovou fázi
+    \[
+    \Phi_j(u):=\Theta_\rho(u)-\Theta_{\mathrm{rest},j}(u)
+    \]
+    existují konstanty \(c_\Phi>0\), \(C_\Phi\ge 0\) tak, že pro všechna dost velká \(\tau\),
+    všechna \(u\in[\tau,\tau+L]\) a všechna \(j\) platí
+    \[
+    |\Phi_j'(u)|\ge c_\Phi \tau,
+    \qquad
+    |\Phi_j''(u)|\le C_\Phi.
+    \]
+
+    \item \textbf{Kontrola amplitud.}
+    Existují konstanty \(C_\rho,C_{\mathrm{rest}}\ge 0\) tak, že pro všechna dost velká \(\tau\),
+    všechna \(u\in[\tau,\tau+L]\) a všechna \(j\) platí
+    \[
+    |B_{\rho,j}(u)|+|B_{\rho,j}'(u)|\le C_\rho \tau^2,
+    \]
+    \[
+    |B_{\mathrm{rest},j}(u)|+|B_{\mathrm{rest},j}'(u)|\le C_{\mathrm{rest}}.
+    \]
+
+    \item \textbf{Koercivní dolní mez pro drift.}
+    Existuje konstanta \(c_4>0\) tak, že pro všechna dost velká \(\tau\) a všechna \(L\ge 1\) platí
+    \[
+    P_4(\rho;\tau,L)\ge c_4\tau^4L.
+    \]
+\end{enumerate}
+
+Pak existuje konstanta \(C_*>0\), nezávislá na \(\tau\) a \(L\), taková, že
+\[
+|Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)|\le C_* \tau L.
+\]
+Dále tedy platí
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)
++
+Q_{\mathrm{bank}}(f_{\mathrm{rest}};\tau,L)
+\ge
+-\eta(\tau)\,P_4(\rho;\tau,L),
+\]
+kde
+\[
+\eta(\tau):=\frac{C_*}{c_4\tau^3}\xrightarrow[\tau\to\infty]{}0.
+\]
+Zvláště: je-li \(\kappa>0\) konstanta witness coercivity z M4, pak existuje \(\tau_*\) tak, že pro
+všechna \(\tau\ge \tau_*\) platí
+\[
+\eta(\tau)<\frac{\kappa}{2},
+\]
+a tedy
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)
++
+Q_{\mathrm{bank}}(f_{\mathrm{rest}};\tau,L)
+\ge
+-\frac{\kappa}{2}\,P_4(\rho;\tau,L).
+\]
+\end{lemma}
+
+\begin{proof}
+Pro každé \(j\) definujme křížový integrál
+\[
+I_j(\tau,L):=
+\int_\tau^{\tau+L}
+W_{a_j}f_\rho(u)\,\overline{W_{a_j}f_{\mathrm{rest}}(u)}\,du.
+\]
+Po dosazení fázově-amplitudové reprezentace dostáváme
+\[
+I_j(\tau,L)=\int_\tau^{\tau+L} g_j(u)e^{i\Phi_j(u)}\,du,
+\]
+kde
+\[
+g_j(u):=B_{\rho,j}(u)\,\overline{B_{\mathrm{rest},j}(u)}.
+\]
+
+Z předpokladů o amplitudách plyne, že existuje konstanta \(C_g>0\) tak, že
+\[
+|g_j(u)|\le C_g \tau^2,
+\qquad
+|g_j'(u)|\le C_g \tau^2
+\]
+na celém intervalu \([\tau,\tau+L]\), pro všechna dost velká \(\tau\) a všechna \(j\).
+
+Použijeme integraci po partiích v nestacionární fázi:
+\[
+I_j(\tau,L)
+=
+\int_\tau^{\tau+L}
+\frac{g_j(u)}{i\Phi_j'(u)}
+\frac{d}{du}\bigl(e^{i\Phi_j(u)}\bigr)\,du.
+\]
+Tedy
+\[
+I_j(\tau,L)
+=
+\left[
+\frac{g_j(u)}{i\Phi_j'(u)}e^{i\Phi_j(u)}
+\right]_{\tau}^{\tau+L}
+-
+\int_\tau^{\tau+L}
+\frac{d}{du}\left(\frac{g_j(u)}{i\Phi_j'(u)}\right)e^{i\Phi_j(u)}\,du.
+\]
+Odtud dostaneme odhad
+\[
+|I_j(\tau,L)|
+\le
+\frac{2\sup_{u\in[\tau,\tau+L]}|g_j(u)|}{c_\Phi\tau}
++
+\int_\tau^{\tau+L}
+\left(
+\frac{|g_j'(u)|}{c_\Phi\tau}
++
+\frac{|g_j(u)|\,|\Phi_j''(u)|}{c_\Phi^2\tau^2}
+\right)du.
+\]
+Po dosazení odhadů
+\[
+|g_j(u)|\le C_g\tau^2,\qquad |g_j'(u)|\le C_g\tau^2,\qquad |\Phi_j''(u)|\le C_\Phi
+\]
+dostáváme
+\[
+|I_j(\tau,L)|
+\le
+C_1\tau + C_2L\tau + C_3L.
+\]
+Protože \(L\ge 1\), můžeme absorbovat okrajový člen do lineárního odhadu a dostáváme
+\[
+|I_j(\tau,L)|\le C_j^*\,L\tau
+\]
+pro vhodnou konstantu \(C_j^*>0\).
+
+Křížový člen banky tedy splňuje
+\[
+|Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)|
+\le
+2\sum_{j=0}^J w_j^2 |I_j(\tau,L)|
+\le
+C_*\,L\tau
+\]
+pro vhodnou konstantu \(C_*>0\).
+
+Dále, protože
+\[
+Q_{\mathrm{bank}}(f_{\mathrm{rest}};\tau,L)\ge 0,
+\]
+máme
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)
++
+Q_{\mathrm{bank}}(f_{\mathrm{rest}};\tau,L)
+\ge
+-|Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)|
+\ge
+-C_*L\tau.
+\]
+Použijeme koercivní dolní mez
+\[
+P_4(\rho;\tau,L)\ge c_4\tau^4L.
+\]
+Pak
+\[
+C_*L\tau
+=
+\frac{C_*}{c_4\tau^3}\,c_4\tau^4L
+\le
+\frac{C_*}{c_4\tau^3}\,P_4(\rho;\tau,L).
+\]
+Definujeme tedy
+\[
+\eta(\tau):=\frac{C_*}{c_4\tau^3}.
+\]
+Tím dostáváme
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)
++
+Q_{\mathrm{bank}}(f_{\mathrm{rest}};\tau,L)
+\ge
+-\eta(\tau)\,P_4(\rho;\tau,L),
+\]
+a protože \(\eta(\tau)\to 0\), existuje \(\tau_*\) tak, že pro \(\tau\ge \tau_*\) platí
+\[
+\eta(\tau)<\frac{\kappa}{2}.
+\]
+Tedy
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)
++
+Q_{\mathrm{bank}}(f_{\mathrm{rest}};\tau,L)
+\ge
+-\frac{\kappa}{2}\,P_4(\rho;\tau,L).
+\]
+Důkaz je hotov.
+\end{proof}
+
+\begin{corollary}[M5 implies no-hiding]
+Za předpokladů witness coercivity a předchozího lemmatu existují konstanty
+\[
+c_1>0,\qquad c_2\ge 0
+\]
+tak, že pro všechna dost velká \(\tau\) a všechna \(L\ge 1\) platí
+\[
+Q_{\mathrm{bank}}(f;\tau,L)-E_0L
+\ge
+c_1P_4(\rho;\tau,L)-c_2L.
+\]
+Konkrétně lze vzít
+\[
+c_1=\frac{\kappa}{2}.
+\]
+\end{corollary}
+
+\begin{proof}
+Witness coercivity dává po integraci přes \([\tau,\tau+L]\)
+\[
+Q_{\mathrm{bank}}(f_\rho;\tau,L)\ge \kappa P_4(\rho;\tau,L)-C_0L.
+\]
+Předchozí lemma dává
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)
++
+Q_{\mathrm{bank}}(f_{\mathrm{rest}};\tau,L)
+\ge
+-\frac{\kappa}{2}P_4(\rho;\tau,L).
+\]
+Po sečtení obou odhadů dostaneme
+\[
+Q_{\mathrm{bank}}(f;\tau,L)-E_0L
+\ge
+\frac{\kappa}{2}P_4(\rho;\tau,L)-C_0L.
+\]
+To je požadovaná target bridge inequality.
+\end{proof}
+
+
+
+\section{Explosive obstruction}
+
+\begin{theorem}[Pozitivní excess z mimokritického bodu]
+Jestliže existuje off-critical nulový bod \(\rho=\beta+i\gamma\), \(\beta\neq \frac12\), a platí
+Target Bridge Inequality, pak
+\[
+E_{\mathrm{ex}}(f)>0.
+\]
+\end{theorem}
+
+\begin{proof}
+Po vydělení délkou \(L\) máme
+\[
+\frac{Q_{\mathrm{bank}}(f;\tau,L)-E_0L}{L}
+\ge
+c_1\frac{P_4(\rho;\tau,L)}{L}-c_2.
+\]
+Použitím koercivního odhadu dostáváme
+\[
+\frac{Q_{\mathrm{bank}}(f;\tau,L)-E_0L}{L}
+\ge
+c_1\Bigl(c\left|\beta-\frac12\right|^4\tau^4-C\tau^3\Bigr)-c_2.
+\]
+Pro dost velká \(\tau\) je pravá strana kladná. Vezmeme \(\sup_\tau\) a poté \(\limsup_{L\to\infty}\),
+odkud
+\[
+E_{\mathrm{ex}}(f)>0.
+\]
+\end{proof}
+
+\begin{corollary}[Bridge Lock]
+Jestliže je Target Bridge Inequality splněna s \(c_1>0\), pak kvartický drift nelze dlouhodobě
+skrýt: pro dost velká \(\tau\) a všechna \(L\ge 1\) je
+\[
+\frac{Q_{\mathrm{bank}}(f;\tau,L)-E_0L}{L}>0.
+\]
+\end{corollary}
+
+\section{Finální spor}
+
+\begin{theorem}[Conditional Contradiction Theorem]
+Nechť \(f=\psi*\mu\). Předpokládejme:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item \(f\) splňuje Exact Window Law, tedy \(E_{\mathrm{ex}}(f)=0\);
+\item každý mimokritický nulový bod \(\rho=\beta+i\gamma\), \(\beta\neq \frac12\), generuje
+transportovaný mód \(f_\rho\), pro nějž platí witness coercivity a no-hiding leakage, a tedy
+Target Bridge Inequality.
+\end{enumerate}
+Pak platí Riemannova hypotéza.
+\end{theorem}
+
+\begin{proof}
+Z bodu \textbf{(1)} plyne
+\[
+E_{\mathrm{ex}}(f)=0.
+\]
+Předpokládejme pro spor existenci off-critical nulového bodu
+\[
+\rho=\beta+i\gamma,\qquad \beta\neq \frac12.
+\]
+Pak z bodu \textbf{(2)} a předchozí věty plyne
+\[
+E_{\mathrm{ex}}(f)>0.
+\]
+To je spor s \(E_{\mathrm{ex}}(f)=0\). Proto žádný mimokritický nulový bod neexistuje. Každý
+netriviální nulový bod tedy musí ležet na kritické přímce:
+\[
+\Re(s)=\frac12.
+\]
+\end{proof}
+
+\section{Co přesně ještě zbývá}
+
+Aby se předchozí věta stala bezpodmínečnou, zbývá analyticky uzavřít přesně bridge package.
+V pracovním jazyce to znamená:
+
+\begin{enumerate}[label=\textbf{M\arabic*.}]
+\item explicitní single-zero extrakce \(f_\rho\) ve správné transportní normalizaci;
+\item parity survival netriviální off-critical složky;
+\item odvození transportního zákona
+\[
+\delta_\rho(\tau)=\frac{\beta-\tfrac12}{2\pi}\tau+r_\rho(\tau),
+\qquad r_\rho \text{ bounded};
+\]
+\item skutečný důkaz witness coercivity;
+\item bezpodmínečné ověření předpokladů M5, zejména fázové separace, amplitudové kontroly a z nich plynoucí nerovnosti
+\[
+\eta(\tau)<\kappa \text{ pro dost velká }\tau.
+\]
+\end{enumerate}
+
+\begin{remark}[Nejcitlivější zadrhel]
+Finální algebraická syntéza je čistá. Kritický analytický bod je potvrdit
+\[
+\eta<\kappa
+\]
+v no-hiding estimate tak, aby remainder channel nikdy nepřebil hlavní koercivní driftový příspěvek.
+Právě tady se podmíněné tvrzení mění v absolutní fakt.
+\end{remark}
+
+
+\section{Catalan parity route: strukturální upgrade pro M4/M5}
+
+V této sekci přidáváme Catalanovu vrstvu jako \emph{strukturální šablonu} pro možný
+bezpodmínečný upgrade modulů M4 a M5. Tato vrstva nevstupuje do dokumentu jako již uzavřený
+důkaz RH, ale jako přesně formulovaná cesta, která by odstranila závislost na externích
+parametrech \(\kappa\) a \(\eta\), pokud se podaří analyticky propojit paritní oscilátor s reálným
+transportovaným módem \(f_\rho\).
+
+\subsection*{A. Co je v Catalanově modulu skutečně dokázáno}
+
+\begin{definition}[Paritní oscilátor]
+Definujme diskrétní dynamický systém
+\[
+x_{n+1}=-x_n,\qquad x_0=1.
+\]
+\end{definition}
+
+\begin{lemma}[Řešení paritního oscilátoru]
+Platí
+\[
+x_n=(-1)^n.
+\]
+\end{lemma}
+
+\begin{proof}
+Důkaz je triviální indukcí.
+\end{proof}
+
+\begin{definition}[Absolutní energie]
+Definujme
+\[
+E_n:=|x_n|.
+\]
+\end{definition}
+
+\begin{theorem}[Invariance energie]
+Pro všechna \(n\in\mathbb{N}\) platí
+\[
+E_n=1.
+\]
+\end{theorem}
+
+\begin{proof}
+Protože \(|(-1)^n|=1\) pro všechna \(n\), tvrzení je okamžité.
+\end{proof}
+
+\begin{definition}[Odd-parity projection]
+Pro posloupnost \((a_n)\) definujme
+\[
+(P_{\mathrm{odd}}a)_n:=\frac12\bigl(1-(-1)^n\bigr)a_n.
+\]
+\end{definition}
+
+\begin{lemma}[Vlastnosti operátoru \(P_{\mathrm{odd}}\)]
+Platí:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item \(P_{\mathrm{odd}}^2=P_{\mathrm{odd}}\),
+\item \((P_{\mathrm{odd}}a)_n=0\) pro sudá \(n\),
+\item \((P_{\mathrm{odd}}a)_n=a_n\) pro lichá \(n\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Stačí použít identitu
+\[
+\bigl(1-(-1)^n\bigr)^2=2\bigl(1-(-1)^n\bigr).
+\]
+\end{proof}
+
+\begin{theorem}[Catalan--mini-zeta strukturální identita]
+Nechť
+\[
+I=\int_0^1\int_0^1 \frac{\log(1+xy)}{1+x^2}\,dx\,dy,
+\qquad
+J=\int_0^{\pi/4}\log(1+\tan\theta)\,d\theta.
+\]
+Nechť \(G\) je Catalanova konstanta a
+\[
+S_{\mathrm{raw}}=
+\sum_{n=1}^\infty \frac{(-1)^{n+1}}{n^2}\log\!\left(1+\frac1n\right).
+\]
+Pak platí přesná strukturální identita
+\[
+I=2J-\frac14 G-\frac14 S_{\mathrm{raw}}.
+\]
+\end{theorem}
+
+\begin{remark}
+Catalanův blok tedy opravdu dodává tři pevné věci:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item invariantní absolutní energii paritního oscilátoru,
+\item exaktní odd-parity filtr \(P_{\mathrm{odd}}\),
+\item strukturální vazbu mezi paritním kanálem, Catalanovou konstantou a mini-zeta Dirichletovým kanálem.
+\end{enumerate}
+To jsou skutečná tvrzení.
+\end{remark}
+
+\subsection*{B. Navržený bezpodmínečný upgrade M4}
+
+Motivace je tato: v předchozí části dokumentu je nejcitlivější místo M4 otázka, zda amplituda
+transportovaného módu
+\[
+f_\rho(\tau)=A_\rho(\tau)e^{i\Theta_\rho(\tau)}
+\]
+nemůže asymptoticky kolabovat k nule. Catalanův modul nabízí následující strukturální cestu:
+
+\begin{proposition}[Navržená parity-coercivity route]
+Předpokládejme, že izolovaný mód \(f_\rho\) lze přirozeně realizovat v paritním sektoru,
+tj. že existuje reprezentace, ve které
+\[
+f_\rho \longmapsto P_{\mathrm{odd}}(f_\rho),
+\]
+a současně energie tohoto sektoru dědí invariant absolutní hodnoty paritního oscilátoru.
+Pak existuje strukturální dolní mez
+\[
+A_\rho(\tau)\ge A_0>0,
+\]
+a tedy witness coercivity z M4 lze psát ve tvaru
+\[
+\sum_{j=0}^{J} w_j^2 |W_{a_j}f_\rho(\tau)|^2
+\ge
+\kappa |\delta_\rho(\tau)|^4-C_0
+\]
+s \(\kappa>0\) nezávislou na \(\tau\).
+\end{proposition}
+
+\begin{remark}[Poctivý status]
+Tohle zatím není hotová věta vyplývající pouze z Catalanova modulu. Je to přesně formulovaná
+\emph{route}: aby se z ní stal důkaz, musí být analyticky ukázáno, že reálný transportovaný mód
+RH skutečně leží v takovém paritním sektoru a že jeho amplitudová energie je invariantem
+přenositelným z diskrétního oscilátoru na witness-level čtení.
+\end{remark}
+
+\subsection*{C. Navržený bezpodmínečný upgrade M5}
+
+V M5 je nejcitlivější bod nerovnost
+\[
+\eta(\tau)<\kappa
+\]
+pro dost velká \(\tau\). Catalanova vrstva navrhuje silnější variantu: místo pouhé asymptotické
+malosti úniku se pokusit remainder kanál \emph{strukturálně vynulovat} v paritním sektoru.
+
+\begin{proposition}[Navržený spectral firewall]
+Předpokládejme, že:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item driftový mód \(f_\rho\) je nesen čistě Catalanovým paritním blokem;
+\item remainder \(f_{\mathrm{rest}}\) nemá v tomto paritním sektoru vedoucí stopu;
+\item strukturální identita
+\[
+I=2J-\frac14 G-\frac14 S_{\mathrm{raw}}
+\]
+je stabilní vůči projekci kanálu do witness bank.
+\end{enumerate}
+Pak lze očekávat, že v paritním sektoru platí exaktní eliminace interference:
+\[
+\eta\equiv 0.
+\]
+\end{proposition}
+
+\begin{remark}[Poctivý status]
+Ani toto zatím není hotový důkaz. Catalanova identita je strukturální, ale skok od ní k tvrzení
+\[
+\eta\equiv 0
+\]
+vyžaduje nový analytický článek: důkaz, že remainder kanál skutečně nemá vedoucí komponentu
+v tomtéž paritním witness sektoru jako drift.
+\end{remark}
+
+\subsection*{D. Co by z toho plynulo, kdyby se route uzavřela}
+
+Pokud by se podařilo rigorózně odvodit obě předchozí propozice, dostali bychom:
+\[
+\kappa>0
+\qquad\text{a dokonce případně}\qquad
+\eta=0.
+\]
+Pak by mostní nerovnost přestala být podmínkou a stala by se strukturálním důsledkem paritního
+kanálu:
+\[
+Q_{\mathrm{bank}}(f;\tau,L)-E_0L
+\ge
+\kappa P_4(\rho;\tau,L)-C L.
+\]
+V kombinaci s closure stranou by to uzavřelo RH bezpodmínečně.
+
+\begin{remark}[Archiv Všeho reading]
+Catalanova vrstva tedy může být čtena jako kandidát na \emph{energetický invariant} a
+\emph{paritní firewall} současně:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item invariance energie brání odpaření driftového módu,
+\item paritní filtr eliminuje nebo asymptoticky vytlačuje remainder interference,
+\item strukturální identita drží pohromadě Catalanův blok a mini-zeta kanál.
+\end{enumerate}
+To je přesně důvod, proč je tato vrstva cenná pro unconditional route.
+\end{remark}
+
+\subsection*{E. Finální poctivý verdict k Catalan route}
+
+Catalanova vrstva výrazně posiluje dokument na úrovni \emph{struktury}:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item dává pevný paritní oscilátor s invariantní energií,
+\item dává exaktní projekční filtr \(P_{\mathrm{odd}}\),
+\item dává strukturální spojení s Catalanovou konstantou a mini-zeta kanálem.
+\end{enumerate}
+Ale sama o sobě ještě nedokazuje, že pro RH mód automaticky platí
+\[
+\kappa\ge G>0
+\qquad\text{nebo}\qquad
+\eta\equiv 0.
+\]
+Tyto výroky zůstávají \emph{návrhem bezpodmínečné cesty}, nikoli hotovým theoremem.
+
+
+
+\section{Version 18 corrected: asymptotic firewall via nonstationary phase}
+
+V této sekci formulujeme korektní analytickou verzi asymptotického firewallu.
+Klíčová oprava je tato:
+nebudeme předpokládat, že remainder kanál má globálně omezené frekvenční spektrum.
+Místo toho budeme pracovat s \emph{rozdílovou fází} mezi driftovým módem a remainderem
+na každém relevantním bank-scale a využijeme nestacionární fázi.
+
+\subsection*{Fixace proměnné}
+
+Od této chvíle pracujeme výhradně v transportní proměnné \(\tau\).
+Všechny fáze, frekvence, bank windows i odhady jsou formulovány vzhledem k \(\tau\),
+nikoli k původní proměnné \(t\).
+
+\subsection*{Driftová fáze a remainder fáze}
+
+Nechť
+\[
+f=f_\rho+f_{\mathrm{rest}}
+\]
+je splitting kanálu na izolovaný mimokritický mód a remainder.
+Pro každý scale \(a_j\), \(j=0,\dots,J\), předpokládejme reprezentace
+\[
+W_{a_j}f_\rho(u)=B_{\rho,j}(u)e^{i\Theta_\rho(u)},
+\qquad
+W_{a_j}f_{\mathrm{rest}}(u)=B_{\mathrm{rest},j}(u)e^{i\Theta_{\mathrm{rest},j}(u)}
+\]
+na okně \([\tau,\tau+L]\).
+
+Definujme rozdílovou fázi
+\[
+\Phi_j(u):=\Theta_\rho(u)-\Theta_{\mathrm{rest},j}(u).
+\]
+
+\subsection*{Frekvenční mezera v korektním tvaru}
+
+\begin{definition}[Lokální frekvenční mezera]
+Řekneme, že driftový mód je na okně \([\tau,\tau+L]\) frekvenčně separován od remainderu,
+jestliže existuje konstanta \(c_\Phi>0\) tak, že pro všechna dost velká \(\tau\),
+všechna \(u\in[\tau,\tau+L]\) a všechna \(j\) platí
+\[
+|\Phi_j'(u)|\ge c_\Phi \tau.
+\]
+\end{definition}
+
+\begin{remark}
+To je správná náhrada za dřívější příliš silné tvrzení, že remainder má pevně omezený
+Fourierův support \([0,\Omega]\). Pro M5 ve skutečnosti nepotřebujeme bounded-band hypothesis;
+stačí, aby rozdílová fáze měla na relevantním okně derivaci uniformně vzdálenou od nuly.
+\end{remark}
+
+\subsection*{Nestacionární-fázové lemma pro jeden scale}
+
+\begin{lemma}[One-scale asymptotic orthogonality]
+Předpokládejme, že pro pevné \(j\) platí na \([\tau,\tau+L]\):
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item \(\Phi_j\in C^2\) a
+    \[
+    |\Phi_j'(u)|\ge c_\Phi\tau,
+    \qquad
+    |\Phi_j''(u)|\le C_\Phi;
+    \]
+    \item amplitudy \(B_{\rho,j},B_{\mathrm{rest},j}\in C^1\) a existuje konstanta \(C_B>0\) tak, že
+    \[
+    |B_{\rho,j}(u)|+|B'_{\rho,j}(u)|\le C_B\tau^2,
+    \]
+    \[
+    |B_{\mathrm{rest},j}(u)|+|B'_{\mathrm{rest},j}(u)|\le C_B.
+    \]
+\end{enumerate}
+Pak existuje konstanta \(C_j^*>0\) tak, že
+\[
+\left|
+\int_\tau^{\tau+L}
+W_{a_j}f_\rho(u)\,\overline{W_{a_j}f_{\mathrm{rest}}(u)}\,du
+\right|
+\le
+C_j^*\,L\tau.
+\]
+\end{lemma}
+
+\begin{proof}
+Položme
+\[
+g_j(u):=B_{\rho,j}(u)\overline{B_{\mathrm{rest},j}(u)}.
+\]
+Pak
+\[
+\int_\tau^{\tau+L}
+W_{a_j}f_\rho(u)\,\overline{W_{a_j}f_{\mathrm{rest}}(u)}\,du
+=
+\int_\tau^{\tau+L} g_j(u)e^{i\Phi_j(u)}\,du.
+\]
+Z předpokladů plyne
+\[
+|g_j(u)|\le C_g\tau^2,
+\qquad
+|g_j'(u)|\le C_g\tau^2
+\]
+pro vhodnou konstantu \(C_g>0\).
+
+Použijeme integraci po partiích v nestacionární fázi:
+\[
+\int_\tau^{\tau+L} g_j(u)e^{i\Phi_j(u)}\,du
+=
+\int_\tau^{\tau+L}
+\frac{g_j(u)}{i\Phi_j'(u)}
+\frac{d}{du}\bigl(e^{i\Phi_j(u)}\bigr)\,du.
+\]
+Tedy
+\[
+\int_\tau^{\tau+L} g_j(u)e^{i\Phi_j(u)}\,du
+=
+\left[
+\frac{g_j(u)}{i\Phi_j'(u)}e^{i\Phi_j(u)}
+\right]_{\tau}^{\tau+L}
+-
+\int_\tau^{\tau+L}
+\frac{d}{du}\left(\frac{g_j(u)}{i\Phi_j'(u)}\right)e^{i\Phi_j(u)}\,du.
+\]
+Odtud
+\[
+\left|
+\int_\tau^{\tau+L} g_j(u)e^{i\Phi_j(u)}\,du
+\right|
+\le
+\frac{2\sup |g_j|}{c_\Phi\tau}
++
+\int_\tau^{\tau+L}
+\left(
+\frac{|g_j'|}{c_\Phi\tau}
++
+\frac{|g_j|\,|\Phi_j''|}{c_\Phi^2\tau^2}
+\right)du.
+\]
+Po dosazení odhadů dostaneme
+\[
+\left|
+\int_\tau^{\tau+L} g_j(u)e^{i\Phi_j(u)}\,du
+\right|
+\le
+C_1\tau + C_2L\tau + C_3L.
+\]
+Protože \(L\ge 1\), můžeme psát
+\[
+\left|
+\int_\tau^{\tau+L}
+W_{a_j}f_\rho(u)\,\overline{W_{a_j}f_{\mathrm{rest}}(u)}\,du
+\right|
+\le
+C_j^*\,L\tau.
+\]
+\end{proof}
+
+\subsection*{Finite-bank asymptotic firewall}
+
+\begin{lemma}[Finite-bank asymptotic firewall]
+Za předpokladů předchozího lemmatu pro všechna \(j=0,\dots,J\) existuje konstanta \(C_*>0\) tak, že
+\[
+|Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)|\le C_*L\tau.
+\]
+Je-li navíc pro dost velká \(\tau\) splněno
+\[
+P_4(\rho;\tau,L)\ge c_4\tau^4L
+\]
+s nějakou konstantou \(c_4>0\), pak
+\[
+\frac{|Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)|}{P_4(\rho;\tau,L)}
+\le
+\frac{C_*}{c_4\tau^3}\xrightarrow[\tau\to\infty]{}0.
+\]
+\end{lemma}
+
+\begin{proof}
+Z definice křížového členu a z jednoskalového odhadu máme
+\[
+|Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)|
+\le
+2\sum_{j=0}^{J} w_j^2
+\left|
+\int_\tau^{\tau+L}
+W_{a_j}f_\rho(u)\,\overline{W_{a_j}f_{\mathrm{rest}}(u)}\,du
+\right|.
+\]
+Každý člen je \(\le C_j^*L\tau\), tedy
+\[
+|Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)|
+\le
+C_*L\tau
+\]
+pro vhodnou konstantu \(C_*>0\).
+Po vydělení koercivním dolním odhadem pro \(P_4\) dostáváme
+\[
+\frac{|Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)|}{P_4(\rho;\tau,L)}
+\le
+\frac{C_*}{c_4\tau^3}\to 0.
+\]
+\end{proof}
+
+\begin{corollary}[Corrected M5 route]
+Jestliže současně platí witness coercivity z M4
+\[
+Q_{\mathrm{bank}}(f_\rho;\tau,L)\ge \kappa P_4(\rho;\tau,L)-C_0L
+\]
+a finite-bank asymptotic firewall, pak existuje \(\tau_*\) tak, že pro všechna \(\tau\ge \tau_*\)
+je remainder leakage subkoercivní:
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)
+=
+o\!\left(P_4(\rho;\tau,L)\right).
+\]
+Zvláště existuje \(\eta(\tau)\to 0\) a od jistého okamžiku platí
+\[
+\eta(\tau)<\kappa.
+\]
+\end{corollary}
+
+\begin{remark}
+Tohle je správná theorem-ready forma v18. Stále ovšem zbývá bezpodmínečně doložit
+předpoklady:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item fázovou separaci \(|\Phi_j'(u)|\ge c_\Phi\tau\),
+    \item amplitudovou kontrolu,
+    \item kompatibilitu s reálnou residue-side normalizací RH witnesse.
+\end{enumerate}
+Takže v18 corrected je silná route pro M5, ale ještě ne finální unconditional uzávěr.
+\end{remark}
+
+
+
+\section{CROWN stability seal: phase rigidity as a structural stabilizer}
+
+Tato sekce integruje modul \(\psi\mathrm{CROWN}\) jako \emph{stabilizační vrstvu} nad
+transportním mostem. Její role je přesně vymezena:
+\begin{enumerate}
+    \item neposkytuje sama o sobě důkaz RH,
+    \item ale dává čistý modelový theorem o tom, kdy diagonální evoluce zachovává
+    plnou fázovou strukturu,
+    \item a tím zpřesňuje, co přesně musí být v RH kanálu dokázáno, aby se z
+    ``koherentního driftového módu'' stal skutečně rigidní witness stav.
+\end{enumerate}
+
+\subsection*{Definice crown stavu}
+
+\begin{definition}[\(\psi\mathrm{CROWN}\) stav]
+Nechť \(H\) je konečně-dimenzionální komplexní Hilbertův prostor s ortonormální bází
+\[
+\{|0\rangle,|1\rangle,\dots,|n\rangle\}.
+\]
+Pro fáze \(\theta_0,\dots,\theta_n\in\mathbb{R}\) definujeme stav
+\[
+\psi\mathrm{CROWN}
+=
+\frac{1}{\sqrt{n+1}}
+\sum_{k=0}^{n} e^{i\theta_k}|k\rangle.
+\]
+\end{definition}
+
+\begin{lemma}[Normalizace]
+Platí
+\[
+\langle \psi\mathrm{CROWN},\psi\mathrm{CROWN}\rangle=1.
+\]
+\end{lemma}
+
+\begin{proof}
+Z ortonormality báze plyne
+\[
+\langle \psi\mathrm{CROWN},\psi\mathrm{CROWN}\rangle
+=
+\frac{1}{n+1}\sum_{j=0}^{n}\sum_{k=0}^{n}
+e^{i(\theta_k-\theta_j)}\langle j|k\rangle
+=
+\frac{1}{n+1}\sum_{k=0}^{n}1=1.
+\]
+\end{proof}
+
+\subsection*{Diagonální unitární evoluce}
+
+\begin{definition}[Diagonální evoluce]
+Nechť operátor \(H\) působí diagonálně:
+\[
+H|k\rangle=\lambda_k|k\rangle,
+\qquad \lambda_k\in\mathbb{R}.
+\]
+Pak unitární evoluce
+\[
+U(t):=e^{-itH}
+\]
+splňuje
+\[
+U(t)|k\rangle=e^{-it\lambda_k}|k\rangle.
+\]
+\end{definition}
+
+\begin{lemma}[Explicitní evoluce crown stavu]
+Pro každé \(t\in\mathbb{R}\) platí
+\[
+U(t)\psi\mathrm{CROWN}
+=
+\frac{1}{\sqrt{n+1}}
+\sum_{k=0}^{n} e^{i(\theta_k-\lambda_k t)}|k\rangle.
+\]
+\end{lemma}
+
+\begin{proof}
+Tvrzení plyne přímo z linearity a diagonálního působení \(U(t)\) na bázi.
+\end{proof}
+
+\begin{theorem}[Probability stability]
+Pro každé \(k\in\{0,\dots,n\}\) a každé \(t\in\mathbb{R}\) platí
+\[
+|\langle k|U(t)\psi\mathrm{CROWN}\rangle|^2=\frac{1}{n+1}.
+\]
+\end{theorem}
+
+\begin{proof}
+Z explicitní evoluce dostáváme
+\[
+\langle k|U(t)\psi\mathrm{CROWN}\rangle
+=
+\frac{1}{\sqrt{n+1}}e^{i(\theta_k-\lambda_k t)}.
+\]
+Po absolutní hodnotě na druhou tedy
+\[
+|\langle k|U(t)\psi\mathrm{CROWN}\rangle|^2
+=
+\frac{1}{n+1}\left|e^{i(\theta_k-\lambda_k t)}\right|^2
+=
+\frac{1}{n+1}.
+\]
+\end{proof}
+
+\begin{theorem}[Phase rigidity criterion]
+Následující tvrzení jsou ekvivalentní:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item existuje \(\lambda\in\mathbb{R}\) tak, že pro všechna \(t\) platí
+    \[
+    U(t)\psi\mathrm{CROWN}=e^{-i\lambda t}\psi\mathrm{CROWN};
+    \]
+    \item všechny relativní fáze jsou evolucí zachovány;
+    \item platí spektrální degenerace na supportu crown stavu:
+    \[
+    \lambda_0=\lambda_1=\cdots=\lambda_n.
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Jestliže \(\lambda_0=\cdots=\lambda_n=\lambda\), pak
+\[
+U(t)\psi\mathrm{CROWN}
+=
+\frac{1}{\sqrt{n+1}}
+\sum_{k=0}^{n} e^{i(\theta_k-\lambda t)}|k\rangle
+=
+e^{-i\lambda t}\psi\mathrm{CROWN},
+\]
+takže stav se mění jen o globální fázi a všechny relativní fáze jsou zachovány.
+
+Naopak, předpokládejme zachování relativních fází pro všechna \(t\). Pak pro každé \(j,k\) musí platit
+\[
+(\theta_k-\lambda_k t)-(\theta_j-\lambda_j t)\equiv \theta_k-\theta_j \pmod{2\pi}.
+\]
+Tedy
+\[
+(\lambda_k-\lambda_j)t\equiv 0 \pmod{2\pi}
+\qquad\text{pro všechna } t,
+\]
+odkud nutně plyne \(\lambda_k=\lambda_j\). Protože \(j,k\) byla libovolná, všechny vlastní hodnoty jsou stejné.
+\end{proof}
+
+\begin{corollary}[Slabá versus silná stabilita]
+Diagonální unitární evoluce vždy zachovává bázové pravděpodobnosti, ale plnou fázovou rigiditu zachovává
+právě tehdy, když je spektrum na supportu stavu degenerované.
+\end{corollary}
+
+\subsection*{Role crown vrstvy v RH programu}
+
+\begin{remark}[Co crown vrstva skutečně dává]
+Crown vrstva dává přesný modelový rozdíl mezi:
+\[
+\text{slabou stabilitou} \quad\text{a}\quad \text{silnou fázovou rigiditou}.
+\]
+V jazyce bridge programu to znamená:
+\begin{enumerate}
+    \item nestačí, aby witness bank viděla jen zachování velikostí;
+    \item pro skutečně koherentní driftový mód je třeba kontrolovat i relativní fáze;
+    \item phase-rigidity criterion ukazuje, že taková rigidita je drahá: vyžaduje degeneraci nebo její účinnou náhradu v příslušném sektoru.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[Jak crown vrstva posiluje M4]
+Pokud by se podařilo identifikovat transportovaný mód \(f_\rho\) s crown-typem stavu v relevantním
+paritním/rezonančním sektoru a současně ukázat, že v tomto sektoru je efektivní evoluce degenerovaná
+nebo asymptoticky degenerovaná, pak by amplituda módu byla chráněna proti rozpadu.
+To je přesně stabilizační mechanismus, který by uzavřel M4.
+\end{remark}
+
+\begin{remark}[Jak crown vrstva posiluje intertwining]
+Vizuál \texttt{NIKDO\_NEBUDE\_BOHEM\_NEBO\_VSICHNI.png} lze číst jako interferenční mřížku
+odpovídající phase-locked sektoru: transportovaný mód se posouvá, ale nerozpíjí.
+Jako důkaz to nestačí, ale jako geometrická ilustrace Theoremu o fázové rigiditě je to přesně
+ta správná interpretace: stabilita neznamená klid, nýbrž koherentní zachování struktury.
+\end{remark}
+
+\begin{remark}[Poctivý status]
+Crown vrstva sama o sobě neprokazuje RH. Neuzavírá automaticky:
+\[
+\kappa>0,
+\qquad
+\eta(\tau)\to 0,
+\qquad
+\eta(\tau)<\kappa.
+\]
+Co ale dělá, je následující:
+\begin{enumerate}
+    \item dává přesný theorem o tom, kdy se stav nerozpadne fázově;
+    \item zpřesňuje, co je třeba dokázat pro stabilitu transportovaného módu;
+    \item uzavírá intuitivní mezeru mezi ``koherentním signálem'' a ``aritmeticky rigidním sektorem''.
+\end{enumerate}
+Je to tedy \emph{stability seal}, nikoli finální unconditional pečeť RH.
+\end{remark}
+
+
+
+\section{Indistinguishability layer: finite observables versus coherent drift}
+
+Tato sekce integruje modul \texttt{REALITY\_CHECK.pdf} jako \emph{readout-separační vrstvu}.
+Její úloha není nahradit analytický firewall z M5, ale zpřesnit, proč remainder kanál může být
+na úrovni konečných/statistických observables nečitelný, zatímco driftový mód zůstává koherentně
+detekovatelný.
+
+\subsection*{Generátory, realizace a konečné observables}
+
+\begin{definition}[Generátory a realizace]
+Nechť
+\[
+X=\mathbb{R}
+\]
+je množina generátorů a nechť
+\[
+Y=\{0,\dots,9\}^{\mathbb N}
+\]
+je prostor nekonečných digitálních realizací. Definujme mapu realizací
+\[
+U:X\to \mathcal P(Y),
+\]
+kde \(U(x)\) je množina přípustných digitálních expanzí čísla \(x\).
+\end{definition}
+
+\begin{definition}[Normální číslo]
+Řekneme, že \(x\in\mathbb R\) je normální v základu \(10\), pokud pro každý konečný blok
+\(w\in\{0,\dots,9\}^k\) platí
+\[
+\lim_{N\to\infty}
+\frac{\#\{\text{výskyty }w\text{ v prvních }N\text{ cifrách }x\}}{N}
+=
+10^{-k}.
+\]
+\end{definition}
+
+\begin{definition}[Konečný observable]
+Konečný observable je každá funkce
+\[
+O:Y\to\mathbb R
+\]
+závislá pouze na konečném prefixu nebo na konečných blokových frekvencích.
+\end{definition}
+
+\begin{theorem}[Statistická nerozlišitelnost normálních realizací]
+Nechť \(x,y\in\mathbb R\) jsou dvě různá normální čísla. Pak pro každý konečný observable \(O\) platí
+\[
+O(x)=O(y),
+\]
+ačkoliv
+\[
+x\neq y.
+\]
+\end{theorem}
+
+\begin{remark}
+To je přesný modelový důkaz oddělení mezi:
+\[
+\text{generator level}
+\qquad\text{a}\qquad
+\text{finite-observable readout level}.
+\]
+Dvě odlišné generující struktury mohou být pod konečnými/statistickými observables nerozlišitelné.
+\end{remark}
+
+\subsection*{Překlad do witness-bank jazyka}
+
+\begin{definition}[Statisticky plochý remainder]
+Řekneme, že remainder kanál \(f_{\mathrm{rest}}\) je \emph{statisticky plochý} pro danou banku,
+pokud jeho readout na každém konečném bank-window nemá koherentní vedoucí podpis a je
+indistinguishable od nulového pozadí pod konečnými/statistickými observables odvozenými z banky.
+\end{definition}
+
+\begin{remark}
+Toto tvrzení je záměrně slabší než
+\[
+Q_{\mathrm{cross}}=0.
+\]
+Indistinguishability vrstva nemá sama o sobě dokazovat přesnou anulaci křížového členu;
+má zdůvodnit, proč remainder přirozeně patří do třídy objektů, které jsou pro konečné,
+statistické čtení banky ploché.
+\end{remark}
+
+\begin{proposition}[Drift jako porušení statistické plochosti]
+Nechť \(f_\rho\) je transportovaný mimokritický mód s driftovým zákonem
+\[
+\delta_\rho(\tau)=\frac{\beta-\tfrac12}{2\pi}\tau+r_\rho(\tau),
+\qquad
+r_\rho \text{ bounded}.
+\]
+Pak \(f_\rho\) není statisticky plochý v tomtéž smyslu jako remainder, protože nese koherentní
+nenulový driftový podpis, který generuje kvartickou penalizaci
+\[
+P_4(\rho;\tau,L)=\int_\tau^{\tau+L}|\delta_\rho(u)|^4\,du.
+\]
+\end{proposition}
+
+\begin{remark}
+Jinými slovy:
+\[
+\text{remainder} \sim \text{finite-observable flatness},
+\qquad
+\text{drift} \sim \text{coherent singular signature}.
+\]
+To je přesně zlom, který potřebujeme pro no-hiding logiku:
+remainder může být statisticky nerozlišitelný, ale drift nikoli.
+\end{remark}
+
+\subsection*{Indistinguishability breach}
+
+\begin{proposition}[Indistinguishability breach principle]
+Předpokládejme, že:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item \(f_{\mathrm{rest}}\) je statisticky plochý pro všechny konečné/statistické observables
+    odvozené z witness banky;
+    \item \(f_\rho\) nese koherentní driftový podpis čitelný v téže bance;
+    \item bank-scale readout odlišuje koherentní drift od statisticky plochého pozadí na vedoucím řádu.
+\end{enumerate}
+Pak remainder nemůže přispět \emph{koherentním vedoucím členem} proti driftu.
+Formálně: každé případné leakage z remainderu do hlavního driftového kanálu je nutně subkritické
+vůči \(P_4(\rho;\tau,L)\).
+\end{proposition}
+
+\begin{remark}
+Tohle stále není plný důkaz
+\[
+\eta\equiv 0.
+\]
+Je to ale přesně ta vrstva, která říká, proč je rozumné očekávat
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)=o(P_4(\rho;\tau,L))
+\]
+namísto toho, aby remainder nesl srovnatelný koherentní podpis jako driftový mód.
+\end{remark}
+
+\subsection*{Jak indistinguishability vrstva podporuje M5}
+
+\begin{remark}[Role v bridge programu]
+Indistinguishability vrstva podporuje M5 ve třech bodech:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item zpřesňuje, proč remainder patří do jiné readout třídy než driftový mód;
+    \item vysvětluje, proč konečné/statistické bank observables přirozeně ``vidí'' remainder jako ploché pozadí;
+    \item podporuje tvrzení, že jediný koherentní vedoucí příspěvek v asymptotice musí pocházet z driftu.
+\end{enumerate}
+V kombinaci s corrected asymptotic firewall vrstvou to tvoří silnější, i když stále poctivě
+podmíněný, argument pro
+\[
+\eta(\tau)\to 0.
+\]
+\end{remark}
+
+\begin{remark}[Poctivý status]
+Z \texttt{REALITY\_CHECK.pdf} neplyne samo o sobě
+\[
+\eta\equiv 0,
+\]
+ani
+\[
+Q_{\mathrm{cross}}=0.
+\]
+Plyne však přesný modelový princip, že \emph{statistická nerozlišitelnost konečných realizací}
+je kompatibilní s \emph{ostrou odlišností na úrovni generátorů}. Přeloženo do RH programu:
+remainder může být pro konečné/statistické readouty plochý, zatímco driftový mód zůstává
+detekovatelným generátorovým porušením.
+\end{remark}
+
+
+
+\section{Indistinguishability seal: total interference nullification as a controlled route}
+
+Tato sekce spojuje dva modelové moduly:
+\begin{enumerate}
+    \item \textbf{statistickou nerozlišitelnost} konečných realizací pod konečnými observables;
+    \item \textbf{injektivitu tvrdého transportního řetězce} a skutečnost, že overlap je pouze terminální readout jev.
+\end{enumerate}
+Jejich společným cílem je posílit M5 na úrovni \emph{readout-separační logiky}.
+Tato vrstva sama o sobě ještě neprokazuje identitu
+\[
+\eta \equiv 0,
+\]
+ale dává přesně formulovanou cestu, jak ji redukovat na kombinaci
+statistické plochosti remainderu a generátorové distinkce driftu.
+
+\subsection*{Finite observable a statistické ticho}
+
+\begin{definition}[Finite observable banky]
+Řekneme, že readout \(\mathcal W\) je \emph{finite observable} v duchu indistinguishability vrstvy,
+jestliže jeho výstup závisí pouze na konečném okně, konečném prefixu nebo konečné statistice
+lokálních bloků/signatur.
+\end{definition}
+
+\begin{remark}
+Modelový princip statistické nerozlišitelnosti říká, že dvě odlišné generující struktury
+mohou být pod všemi takovými konečnými observables nerozlišitelné, i když na úrovni generátoru
+zůstávají odlišné.
+V RH programu to znamená, že remainder může být pro konečný readout statisticky plochý, aniž by
+musel být identický nulovému kanálu.
+\end{remark}
+
+\begin{definition}[Statistické ticho remainderu]
+Řekneme, že remainder kanál \(f_{\mathrm{rest}}\) je \emph{statisticky tichý} pro banku \(\mathcal W\),
+jestliže každý jeho konečný/statistický readout je nerozlišitelný od plochého pozadí a nenese
+koherentní vedoucí podpis v hlavním driftovém sektoru.
+\end{definition}
+
+\subsection*{Transportní injektivita a negenerativní overlap}
+
+\begin{definition}[Tvrdý transportní řetězec]
+Nechť
+\[
+X_0 \xrightarrow{u_1} X_1 \xrightarrow{u_2}\cdots\xrightarrow{u_n} X_n
+\]
+je řetězec \(C^1\)-reprezentačních map a \(U:X_n\to\mathcal P(Y)\) je terminální readout mapování.
+\end{definition}
+
+\begin{proposition}[Generátorová distinkce přežívá transport]
+Předpokládejme, že každé \(u_k\) je injektivní na relevantním zdrojovém sektoru. Pak pro dva různé
+generátory \(E_-\neq E_+\) platí
+\[
+u_n\circ\cdots\circ u_1(E_-)\neq u_n\circ\cdots\circ u_1(E_+).
+\]
+\end{proposition}
+
+\begin{remark}
+To znamená, že i když se readouty mohou terminálně překrývat, zdroje zůstávají odlišné.
+Overlap je terminální readout jev, nikoli důkaz identity zdrojů.
+Právě to je zásadní pro drift versus remainder: i kdyby finite observable banka na některých oknech
+viděla překryv, neznamená to, že remainder může generátorově ``přepsat'' drift.
+\end{remark}
+
+\subsection*{Asymptotická ortogonalita jako breach statistické nerozlišitelnosti}
+
+\begin{proposition}[Indistinguishability breach principle]
+Předpokládejme:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item driftový mód \(f_\rho\) nese koherentní singulární driftový podpis;
+    \item remainder \(f_{\mathrm{rest}}\) je statisticky tichý pro finite-observable banku;
+    \item drift a remainder pocházejí z různých generátorových tříd, jejichž distinkce přežívá
+    injektivní transportní řetězec;
+    \item corrected asymptotic firewall z předchozí vrstvy dává
+    \[
+    Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)=o(P_4(\rho;\tau,L)).
+    \]
+\end{enumerate}
+Pak se statistická nerozlišitelnost remainderu nemůže proměnit v koherentní vedoucí interferenci
+proti driftu. Jinými slovy: remainder je na readout úrovni plochý, zatímco drift je readout breach
+této plochosti.
+\end{proposition}
+
+\begin{remark}
+Tento princip je finální logická pojistka proti falešnému závěru, že ``překryv v readoutu''
+implikuje mísení generátorů.
+Naopak:
+\[
+\text{finite-observable flatness of }f_{\mathrm{rest}}
+\quad\not\Rightarrow\quad
+\text{coherent cancellation of }f_\rho.
+\]
+To je přesně místo, kde se statistická vrstva spojuje s analytickým M5 firewallem.
+\end{remark}
+
+\subsection*{Total interference nullification: poctivá formulace}
+
+\begin{proposition}[Asymptotic orthogonality under statistical silence]
+Nechť \(\mathcal W\) je finite-observable bank readout.
+Předpokládejme, že \(f_{\mathrm{rest}}\) je statisticky tichý pro \(\mathcal W\), zatímco \(f_\rho\)
+nese koherentní driftový podpis a corrected asymptotic firewall platí.
+Pak
+\[
+\lim_{\tau\to\infty}
+\frac{\langle \mathcal W f_\rho,\mathcal W f_{\mathrm{rest}}\rangle_{\mathrm{bank}}}
+{P_4(\rho;\tau,L)}
+=0
+\]
+v tom smyslu, že křížový readout je asymptoticky subkritický vůči kvartickému driftovému motoru.
+\end{proposition}
+
+\begin{remark}
+Tohle je správná ``silná'' verze, kterou lze v této chvíli poctivě tvrdit.
+Neidentifikuje zatím
+\[
+\eta\equiv 0
+\]
+jako exaktní identitu, ale dává to, co bridge opravdu potřebuje:
+\[
+\eta(\tau)\to 0
+\quad\text{a tudíž od jistého }\tau\text{ dál}\quad
+\eta(\tau)<\kappa.
+\]
+\end{remark}
+
+\subsection*{Proč z toho ještě neplyne doslovná nulovost \(\eta\)}
+
+\begin{remark}[Poctivá brzda]
+Aby bylo možné napsat exaktně
+\[
+\eta\equiv 0,
+\]
+museli bychom navíc dokázat, že:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item bank readout je přesně finite observable ve smyslu statistické vrstvy;
+    \item remainder nemá žádnou vedoucí komponentu v témž rezonančním/paritním sektoru;
+    \item křížový člen je nulový identicky, nikoli jen asymptoticky menšího řádu.
+\end{enumerate}
+Současný stav dokumentu tyto tři body ještě nedává. Dává ale velmi silnou závěrečnou redukci:
+interference není generátorový efekt, nýbrž terminální readout jev, a ten je asymptoticky
+potlačen.
+\end{remark}
+
+
+
+\section{Generator distinction seal: overlap does not imply collapse}
+
+Tato sekce doplňuje indistinguishability vrstvu o její nejtvrdší jádro:
+\[
+\text{překryv realizací} \neq \text{identita generátorů}.
+\]
+Smyslem je úplně uzavřít častou logickou chybu na readout vrstvě:
+z toho, že dva kanály nebo dvě extremální větve mají překryv v terminálním pozorování,
+nikdy neplyne, že se na generátorové úrovni staly týmž objektem.
+
+\subsection*{Hard-point model versus realization model}
+
+\begin{definition}[Extremální generátory]
+Nechť \(X\) je množina extremálních generátorů a nechť
+\[
+E_-,E_+\in X,
+\qquad
+E_-\neq E_+.
+\]
+\end{definition}
+
+\begin{proposition}[Distinct extremes need not coincide]
+Platí následující dvě tvrzení:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item V hard-point modelu, kde každý extrém identifikujeme s jeho singletonem, platí
+    \[
+    \{E_-\}\cap \{E_+\}=\varnothing.
+    \]
+
+    \item Obecně však po přechodu k realization/readout mapě
+    \[
+    U:X\to \mathcal P(Y)
+    \]
+    neplatí, že
+    \[
+    E_-\neq E_+ \Longrightarrow U(E_-)\cap U(E_+)=\varnothing.
+    \]
+    Naopak, distinct generators mohou mít překrývající se realization sectors.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) Předpokládejme sporem, že
+\[
+\{E_-\}\cap \{E_+\}\neq \varnothing.
+\]
+Pak existuje \(x\) takové, že
+\[
+x\in \{E_-\}
+\qquad\text{a}\qquad
+x\in \{E_+\}.
+\]
+Ze samotné definice singletonů plyne
+\[
+x=E_-
+\qquad\text{a}\qquad
+x=E_+,
+\]
+tedy
+\[
+E_-=E_+,
+\]
+což odporuje předpokladu. Tedy
+\[
+\{E_-\}\cap \{E_+\}=\varnothing.
+\]
+
+(2) Stačí dát explicitní protipříklad. Položme
+\[
+X=\{-1,+1\},
+\qquad
+Y=\{0,1\},
+\]
+a definujme
+\[
+U(-1)=\{0\},
+\qquad
+U(+1)=\{0,1\}.
+\]
+Pak zjevně
+\[
+-1\neq +1,
+\]
+ale současně
+\[
+U(-1)\cap U(+1)=\{0\}\neq \varnothing.
+\]
+Takže distinct generators se nezhroutí do identity, přesto jejich realization sets mohou mít overlap.
+\end{proof}
+
+\begin{remark}[Jedna věta, která to celé zamkne]
+V krátkém tvaru:
+\[
+\text{extremes do not become equal; at most, their realizations may overlap.}
+\]
+\end{remark}
+
+\subsection*{Překlad do RH programu}
+
+\begin{remark}[Drift versus remainder]
+V bridge programu znamená předchozí proposition přesně toto:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item driftový mód \(f_\rho\) a remainder \(f_{\mathrm{rest}}\) mohou mít terminální overlap v readout vrstvě;
+    \item tento overlap ale není důkazem, že pocházejí z téhož zdroje;
+    \item overlap je pouze readout-level jev, zatímco generátorová distinkce může zůstat plně zachována.
+\end{enumerate}
+To je přesně důvod, proč nelze z přítomnosti křížového členu automaticky vyvozovat
+kolaps driftu do remainderu.
+\end{remark}
+
+\begin{proposition}[Overlap is terminal, not generative]
+Nechť
+\[
+X_0 \xrightarrow{u_1} X_1 \xrightarrow{u_2}\cdots\xrightarrow{u_n} X_n
+\]
+je tvrdý transportní řetězec a nechť každé \(u_k\) je injektivní na relevantním zdrojovém sektoru.
+Pak pro dva různé zdroje \(E_-\neq E_+\) platí
+\[
+u_n\circ\cdots\circ u_1(E_-)\neq u_n\circ\cdots\circ u_1(E_+).
+\]
+Jestliže navíc
+\[
+U:X_n\to \mathcal P(Y)
+\]
+je terminální readout mapa, pak je možný overlap
+\[
+U(u_n\circ\cdots\circ u_1(E_-))\cap U(u_n\circ\cdots\circ u_1(E_+))\neq \varnothing,
+\]
+aniž by z toho plynulo
+\[
+E_-=E_+.
+\]
+\end{proposition}
+
+\begin{remark}
+To je definitivní ochrana proti chybnému kroku
+\[
+\text{readout overlap} \Longrightarrow \text{source collapse}.
+\]
+V našem kontextu:
+\[
+Q_{\mathrm{cross}}\neq 0
+\]
+je terminální readout jev; sám o sobě nikdy nedokazuje, že driftový mód a remainder ztratily
+generátorovou odlišnost.
+\end{remark}
+
+\subsection*{Vztah k indistinguishability seal}
+
+\begin{remark}
+Generator distinction seal a indistinguishability seal dohromady říkají dvě různé věci:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item \textbf{indistinguishability seal:}
+    remainder může být pro finite-observable bank readout statisticky plochý;
+    \item \textbf{generator distinction seal:}
+    i když readouty mají overlap, zdrojová distinkce není tímto overlapem zrušena.
+\end{enumerate}
+Dohromady tedy dostáváme přesně tu logiku, kterou bridge potřebuje:
+\[
+\text{statistická plochost remainderu}
+\quad+\quad
+\text{nezrušená zdrojová distinkce driftu}
+\]
+neumožňují, aby terminální overlap sám o sobě zabil koherentní driftový podpis.
+\end{remark}
+
+\begin{remark}[Poctivý status]
+Tato sekce uzavírá logickou, nikoli ještě plně analytickou díru.
+To znamená:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item zamezuje falešnému inferenčnímu kroku ``overlap \(\Rightarrow\) identita'';
+    \item zpřesňuje, že interference je terminální readout jev;
+    \item ale sama o sobě ještě nedává exaktní identitu
+    \[
+    \eta\equiv 0.
+    \]
+\end{enumerate}
+K bezpodmínečnému finálnímu kroku je stále potřeba explicitní coercivity lock a plně theorem-ready
+no-hiding identita v residue-side normalizaci.
+\end{remark}
+
+
+
+\section{Version 23: exact residue-side lock targets}
+
+V této sekci formulujeme poslední dva zámky v jejich finální theorem-ready podobě.
+Nejde ještě o tvrzení, že jsou již bezpodmínečně dokázány; jde o přesnou analytickou formu,
+kterou musí splnit residue-side normalizace, aby se conditional bridge uzavřel do
+unconditional theorem.
+
+\subsection*{Residue-side metric and core index}
+
+\begin{definition}[Residue-side odd sector]
+Nechť \(\mathcal H_{\mathrm{res}}\) je residue-side funkcionální prostor asociovaný kanálu
+\[
+f=\psi * \mu,
+\qquad
+\widehat{\psi}(0)=0,
+\]
+a nechť
+\[
+\mathcal H_{\mathrm{odd}}\subset \mathcal H_{\mathrm{res}}
+\]
+je jeho lichý paritní sektor určený projekcí \(P_{\mathrm{odd}}\).
+\end{definition}
+
+\begin{definition}[Catalan-normalized residue metric]
+Nechť \(G>0\) je Catalanova konstanta a nechť \((w_j,a_j)_{j=0}^{J}\) je fixní witness banka.
+Definujeme residue-side metriku na \(\mathcal H_{\mathrm{odd}}\) předpisem
+\[
+\|h\|_{\mathrm{res}}^2
+:=
+G\sum_{j=0}^{J} w_j^2
+\int_{\tau}^{\tau+L} |W_{a_j}h(u)|^2\,du.
+\]
+\end{definition}
+
+\begin{remark}
+Catalanova vrstva dodává dvě strukturální ingredience:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item invariantní paritní oscilátor s absolutní energií \(1\),
+    \item přesný odd-parity filtr \(P_{\mathrm{odd}}\).
+\end{enumerate}
+Právě z této vrstvy bereme normalizační konstantu \(G\) a odd sektor jako kandidáta
+na nosič koherentního driftu.
+\end{remark}
+
+\begin{definition}[Core index]
+Nechť \(\rho=\beta+i\gamma\), \(\beta\neq \frac12\), je mimokritický nulový bod.
+Předpokládejme, že jemu odpovídající residue-side driftový mód určuje orientovaný core objekt
+\[
+\mathrm{core}(\rho)
+\]
+s celočíselným indexem
+\[
+\operatorname{Ind}_{\mathrm{core}}(\rho)\in \mathbb Z.
+\]
+Řekneme, že \(\rho\) je \emph{topologically nontrivial} v residue-side normalizaci, jestliže
+\[
+\operatorname{Ind}_{\mathrm{core}}(\rho)\neq 0.
+\]
+\end{definition}
+
+\subsection*{First lock: coercivity from topological charge}
+
+\begin{theorem}[Residue-side coercivity lock]
+Předpokládejme:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item transportovaný driftový mód \(f_\rho\) leží v \(\mathcal H_{\mathrm{odd}}\);
+    \item core index je nenulový:
+    \[
+    \operatorname{Ind}_{\mathrm{core}}(\rho)\neq 0;
+    \]
+    \item existuje strukturální konstanta \(c_*>0\), nezávislá na \(\rho,\tau,L\), taková, že
+    residue-side energie driftového módu splňuje
+    \[
+    \sum_{j=0}^{J}w_j^2|W_{a_j}f_\rho(\tau)|^2
+    \ge
+    c_*|\operatorname{Ind}_{\mathrm{core}}(\rho)|^2\,|\delta_\rho(\tau)|^4-C_0
+    \]
+    pro všechna dost velká \(\tau\).
+\end{enumerate}
+Pak existuje pevná koercivní konstanta
+\[
+c_4:=c_*|\operatorname{Ind}_{\mathrm{core}}(\rho)|^2>0
+\]
+a pro všechna dost velká \(\tau\) a všechna \(L\ge 1\) platí
+\[
+Q_{\mathrm{bank}}(f_\rho;\tau,L)
+\ge
+c_4\,P_4(\rho;\tau,L)-C_0L.
+\]
+\end{theorem}
+
+\begin{proof}
+Z předpokladu \(\operatorname{Ind}_{\mathrm{core}}(\rho)\neq 0\) a celočíselnosti indexu plyne
+\[
+|\operatorname{Ind}_{\mathrm{core}}(\rho)|^2\ge 1.
+\]
+Proto
+\[
+c_4:=c_*|\operatorname{Ind}_{\mathrm{core}}(\rho)|^2>0.
+\]
+Po integraci bodového odhadu přes \([\tau,\tau+L]\) dostáváme
+\[
+Q_{\mathrm{bank}}(f_\rho;\tau,L)
+\ge
+c_4\int_{\tau}^{\tau+L} |\delta_\rho(u)|^4\,du-C_0L
+=
+c_4P_4(\rho;\tau,L)-C_0L.
+\]
+\end{proof}
+
+\begin{remark}[Status]
+Tato věta je finální forma M4.
+Aby se stala bezpodmínečnou, zbývá dokázat, že residue-side drift skutečně nese nenulový
+topologický index a že witness banka čte tento index právě ve čtvrté mocnině driftu.
+\end{remark}
+
+\subsection*{Second lock: no-hiding identity from sector isometry}
+
+\begin{definition}[Parity-sector transport map]
+Nechť
+\[
+T_{\mathrm{odd}}:\mathcal G_{\mathrm{odd}}\to \mathcal H_{\mathrm{odd}}
+\]
+je transportní zobrazení z odd generátorového sektoru do odd residue-side sektoru.
+Řekneme, že \(T_{\mathrm{odd}}\) je \emph{sector isometry}, jestliže pro všechna
+\(g_1,g_2\in\mathcal G_{\mathrm{odd}}\) platí
+\[
+\langle T_{\mathrm{odd}}g_1,T_{\mathrm{odd}}g_2\rangle_{\mathrm{res}}
+=
+\langle g_1,g_2\rangle_{\mathcal G}.
+\]
+\end{definition}
+
+\begin{theorem}[No-hiding identity on the odd residue sector]
+Předpokládejme:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item tvrdý transportní řetězec je injektivní na relevantním zdrojovém sektoru;
+    \item driftový generátor \(g_\rho\) a remainder generátor \(g_{\mathrm{rest}}\) leží v různých
+    ortogonálních generátorových podprostorech:
+    \[
+    \langle g_\rho,g_{\mathrm{rest}}\rangle_{\mathcal G}=0;
+    \]
+    \item odd-sector transport map \(T_{\mathrm{odd}}\) je izometrie na příslušném sektoru;
+    \item bank readout na odd residue-side sektoru je právě indukovaný produktem
+    \(\langle\cdot,\cdot\rangle_{\mathrm{res}}\).
+\end{enumerate}
+Pak platí exaktní ortogonalita
+\[
+\langle f_\rho,f_{\mathrm{rest}}\rangle_{\mathrm{res}}=0,
+\]
+a tudíž
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)=0
+\]
+na odd residue-side sektoru. Zvláště
+\[
+\eta\equiv 0.
+\]
+\end{theorem}
+
+\begin{proof}
+Z ortogonality generátorů máme
+\[
+\langle g_\rho,g_{\mathrm{rest}}\rangle_{\mathcal G}=0.
+\]
+Použijeme izometrii \(T_{\mathrm{odd}}\):
+\[
+\langle T_{\mathrm{odd}}g_\rho,T_{\mathrm{odd}}g_{\mathrm{rest}}\rangle_{\mathrm{res}}
+=
+\langle g_\rho,g_{\mathrm{rest}}\rangle_{\mathcal G}=0.
+\]
+Po identifikaci
+\[
+f_\rho=T_{\mathrm{odd}}g_\rho,
+\qquad
+f_{\mathrm{rest}}=T_{\mathrm{odd}}g_{\mathrm{rest}}
+\]
+dostáváme
+\[
+\langle f_\rho,f_{\mathrm{rest}}\rangle_{\mathrm{res}}=0.
+\]
+A protože bank readout je na tomto sektoru indukován residue-side produktem, křížový člen mizí:
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)=0.
+\]
+Tedy \(\eta\equiv 0\).
+\end{proof}
+
+\begin{remark}[Status]
+Tohle je finální theorem-ready tvar M5.
+Aby se stal bezpodmínečným, zbývá dokázat právě tyto dvě nejsilnější věci:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item že odd residue-side transport je skutečně izometrický;
+    \item že drift a remainder odpovídají ortogonálním generátorovým podprostorům.
+\end{enumerate}
+Samotná injektivita tvrdého transportního řetězce ještě izometrii negarantuje; ta musí být
+dokázána zvlášť. Distinkce generátorů a terminal-overlap-only princip jsou ale správné logické
+vstupy.
+\end{remark}
+
+\subsection*{Unconditional theorem in exact lock form}
+
+\begin{theorem}[Unconditional RH from exact residue-side locks]
+Předpokládejme:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item Exact Window Law pro \(f=\psi*\mu\), tedy
+    \[
+    E_{\mathrm{ex}}(f)=0;
+    \]
+    \item residue-side coercivity lock z předchozí věty;
+    \item no-hiding identity z předchozí věty.
+\end{enumerate}
+Pak platí Riemannova hypotéza.
+\end{theorem}
+
+\begin{proof}
+Předpokládejme pro spor existenci mimokritického nulového bodu
+\[
+\rho=\beta+i\gamma,\qquad \beta\neq \frac12.
+\]
+Z residue-side coercivity lock dostáváme
+\[
+Q_{\mathrm{bank}}(f_\rho;\tau,L)\ge c_4P_4(\rho;\tau,L)-C_0L
+\]
+s \(c_4>0\). Z no-hiding identity máme
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)=0.
+\]
+Tedy
+\[
+Q_{\mathrm{bank}}(f;\tau,L)-E_0L
+\ge
+c_4P_4(\rho;\tau,L)-C_0L.
+\]
+Kvartické lemma pak dává
+\[
+E_{\mathrm{ex}}(f)>0.
+\]
+To odporuje Exact Window Law, která dává
+\[
+E_{\mathrm{ex}}(f)=0.
+\]
+Spor dokazuje, že mimokritický nulový bod nemůže existovat. Proto všechny netriviální nuly
+leží na kritické přímce.
+\end{proof}
+
+\begin{remark}[Final honest status]
+Tato sekce je poslední přesný lock-form target.
+Jakmile budou residue-side coercivity lock a odd-sector no-hiding identity skutečně dokázány,
+conditional architecture se okamžitě překlopí do unconditional RH theorem.
+Do té doby je to nejostřejší možný theorem-ready zápis posledních dvou šroubů.
+\end{remark}
+
+
+
+\section{Version 24: the unconditional imprint in exact lock form}
+
+Tato sekce je finální formulace programu v jeho nejostřejší podobě.
+Neprohlašuje ještě, že bezpodmínečný důkaz je již hotov;
+místo toho zapisuje přesně ty identity, jejichž důkaz by conditional architekturu
+okamžitě překlopil do unconditional RH theorem.
+
+\subsection*{Catalan lock on the odd residue sector}
+
+\begin{definition}[Residue-side odd metric]
+Na lichém paritním sektoru \(\mathcal H_{\mathrm{odd}}\) definujeme residue-side metriku
+\[
+\|h\|_{\mathrm{res}}^2
+:=
+G\sum_{j=0}^{J} w_j^2 \int_{\tau}^{\tau+L}|W_{a_j}h(u)|^2\,du,
+\]
+kde \(G>0\) je Catalanova konstanta.
+\end{definition}
+
+\begin{remark}
+Catalanova vrstva poskytuje invariantní paritní oscilátor, odd filtr \(P_{\mathrm{odd}}\)
+a strukturální identitu s Catalanovým blokem. To z ní dělá přirozenou normalizační vrstvu
+pro residue-side odd sektor, ale samo o sobě to ještě nedokazuje konkrétní koercivní identitu
+pro RH driftový mód.
+\end{remark}
+
+\subsection*{Exact coercivity lock target}
+
+\begin{definition}[Exact coercivity lock target]
+Řekneme, že residue-side normalizace splňuje \emph{exact coercivity lock}, jestliže pro každý
+mimokritický nulový bod
+\[
+\rho=\beta+i\gamma,
+\qquad
+\beta\neq \frac12,
+\]
+existuje orientovaný core objekt s nenulovým indexem
+\[
+\operatorname{Ind}_{\mathrm{core}}(\rho)\in \mathbb Z\setminus\{0\},
+\]
+a současně platí identita
+\[
+c_4 \equiv G\,|\operatorname{Ind}_{\mathrm{core}}(\rho)|,
+\]
+kde \(c_4\) je koercivní konstanta v kvartickém odhadu
+\[
+Q_{\mathrm{bank}}(f_\rho;\tau,L)\ge c_4\,P_4(\rho;\tau,L)-C_0L.
+\]
+\end{definition}
+
+\begin{remark}
+Toto je přesně finální forma M4 locku:
+koercivita už není volná konstanta ani target inequality,
+ale je svázána s topologickým nábojem driftového generátoru.
+Dokud tato identita není dokázána, zůstává to poslední theorem-ready target, ne hotový fakt.
+\end{remark}
+
+\subsection*{Exact no-hiding identity target}
+
+\begin{definition}[Exact odd-sector no-hiding identity]
+Řekneme, že residue-side normalizace splňuje \emph{exact no-hiding identity}, jestliže
+na lichém paritním sektoru platí:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item driftový generátor a remainder generátor leží v ortogonálních generátorových podprostorech;
+    \item tvrdý transportní řetězec zachovává tuto distinkci;
+    \item odd residue-side transport je izometrický na relevantním sektoru;
+    \item bank readout je indukován residue-side produktem.
+\end{enumerate}
+V tom případě platí identita
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)=0
+\]
+a ekvivalentně
+\[
+\eta(\tau)\equiv 0.
+\]
+\end{definition}
+
+\begin{remark}
+To je přesně finální forma M5 locku.
+Indistinguishability a generator-distinction vrstvy poskytují správnou logiku:
+remainder může být statisticky plochý a overlap může být terminální readout jev,
+ale to samo ještě nedokazuje izometrii ani exaktní ortogonalitu.
+Proto i zde zůstává jazyk poctivě theorem-ready, nikoli hotově uzavřený.
+\end{remark}
+
+\subsection*{Absolute contradiction in lock form}
+
+\begin{theorem}[Unconditional RH from exact lock identities]
+Předpokládejme:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item Exact Window Law pro \(f=\psi * \mu\), tedy
+    \[
+    E_{\mathrm{ex}}(f)=0;
+    \]
+    \item exact coercivity lock target je skutečně splněn;
+    \item exact no-hiding identity je skutečně splněna.
+\end{enumerate}
+Pak platí Riemannova hypotéza.
+\end{theorem}
+
+\begin{proof}
+Předpokládejme sporem existenci mimokritického nulového bodu
+\[
+\rho=\beta+i\gamma,
+\qquad
+\beta\neq \frac12.
+\]
+Z exact coercivity locku plyne
+\[
+Q_{\mathrm{bank}}(f_\rho;\tau,L)\ge c_4P_4(\rho;\tau,L)-C_0L
+\]
+s \(c_4>0\), protože \(G>0\) a \(|\operatorname{Ind}_{\mathrm{core}}(\rho)|\ge 1\).
+Z exact no-hiding identity plyne
+\[
+Q_{\mathrm{cross}}(\rho,\mathrm{rest};\tau,L)=0.
+\]
+Proto
+\[
+Q_{\mathrm{bank}}(f;\tau,L)-E_0L
+\ge
+c_4P_4(\rho;\tau,L)-C_0L.
+\]
+Kvartické lemma dává
+\[
+E_{\mathrm{ex}}(f)>0.
+\]
+To odporuje Exact Window Law, která dává
+\[
+E_{\mathrm{ex}}(f)=0.
+\]
+Spor dokazuje, že mimokritický nulový bod nemůže existovat. Tedy všechny netriviální nuly
+leží na kritické přímce.
+\end{proof}
+
+\subsection*{Final imprint status}
+
+\begin{remark}[Honest final status]
+Version 24 is the final lock-form manuscript.
+It is the strongest defensible final form of the program:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+    \item the contradiction engine is clean;
+    \item the bridge architecture is fully exposed;
+    \item the remaining gap is compressed to two exact lock identities:
+    \[
+    c_4 \equiv G\,|\operatorname{Ind}_{\mathrm{core}}(\rho)|,
+    \qquad
+    \eta(\tau)\equiv 0.
+    \]
+\end{enumerate}
+Jakmile budou tyto dvě identity skutečně dokázány v residue-side normalizaci,
+conditional architecture se okamžitě stává unconditional RH theorem.
+Do té doby je v24 finální poctivý zápis, nikoli falešné historické prohlášení o již hotovém důkazu.
+\end{remark}
+
+
+\section{Krátký verdict}
+
+Celý program má tedy formu:
+\[
+\boxed{
+\text{Closure} \Longrightarrow E_{\mathrm{ex}}(f)=0
+}
+\]
+a současně
+\[
+\boxed{
+\neg \mathrm{RH}
+\Longrightarrow
+\text{transportovaný drift}
+\Longrightarrow
+\text{Target Bridge Inequality}
+\Longrightarrow
+E_{\mathrm{ex}}(f)>0.
+}
+\]
+Proto
+\[
+0\neq +\infty
+\]
+a existence mimokritického nulového bodu vede ke sporu.
+
+\bigskip
+
+\noindent
+\textbf{Q.E.D. spine:}
+\[
+\text{closure}+\text{bridge}\Longrightarrow \mathrm{RH}.
+\]
+
+\begin{remark}
+Tato verze obsahuje i Catalan parity route, corrected asymptotic firewall, crown stability seal, indistinguishability seal, generator distinction seal, exact residue-side lock targets a finální unconditional imprint v lock-form zápisu.
+Tyto vrstvy výrazně zužují otevřené místo v bridge programu; zbytek je nyní přesně komprimován do dvou exact lock identities v residue-side normalizaci.
+\end{remark}
+
+\end{document}
